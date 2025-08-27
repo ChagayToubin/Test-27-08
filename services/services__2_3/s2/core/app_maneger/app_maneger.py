@@ -13,7 +13,7 @@ class AppManager:
         try:
             self.dal.open()
             self.client.open()
-            for msg in self.dal.consumer():
+            for msg in self.dal.consume():
                 print("The pull from Kafka was successful.")
                 data = DataBuilder.build(msg)
                 self.client.send_to_kapka(data['topic_name'], data['message'])

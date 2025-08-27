@@ -2,14 +2,15 @@ from kafka import KafkaConsumer
 
 class KafkaDAL:
 
-    def __init__(self, configs):
+    def __init__(self, topics : list[str], configs : dict) -> None:
+        self.topics = topics
         self.configs = configs
         self.consumer = None
 
 
     def open(self):
         try:
-            self.consumer = KafkaConsumer(**self.configs)
+            self.consumer = KafkaConsumer(*self.topics, **self.configs)
         except Exception as e:
             print(type(e).__name__, "-", e)
             raise RuntimeError("Failed to connect to Kapka.") from e

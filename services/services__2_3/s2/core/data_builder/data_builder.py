@@ -1,4 +1,4 @@
-from cleaner import Cleaner
+from project.services.services__2_3.s2.core.data_builder.cleaner import Cleaner
 
 class DataBuilder:
 

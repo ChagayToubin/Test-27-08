@@ -17,6 +17,6 @@ class KafkaDAL:
         if self.consumer:
             self.consumer.close()
 
-    def consume_forever(self):
+    def consume(self):
         for ms in self.consumer:
             yield ms

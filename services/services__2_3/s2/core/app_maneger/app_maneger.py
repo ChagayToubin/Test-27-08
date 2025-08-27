@@ -4,9 +4,10 @@ from project.services.services__2_3.s2.core.data_builder.data_builder import Dat
 
 class AppManager:
 
-    def __init__(self, dal : KafkaDAL, client : KafkaClient):
+    def __init__(self, dal : KafkaDAL, client : KafkaClient, topic_client_names : list):
         self.dal = dal
         self.client = client
+        self.topic_client_names = topic_client_names
 
 
     def manager(self):

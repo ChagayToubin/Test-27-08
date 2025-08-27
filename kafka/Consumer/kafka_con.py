@@ -6,6 +6,7 @@ class KafkaDAL:
         self.configs = configs
         self.consumer = None
 
+
     def open(self):
         try:
             self.consumer = KafkaConsumer(**self.configs)
@@ -13,10 +14,12 @@ class KafkaDAL:
             print(type(e).__name__, "-", e)
             raise RuntimeError("Failed to connect to Kapka.") from e
 
+
     def close(self):
         if self.consumer:
             self.consumer.close()
 
+
     def consume(self):
-        for ms in self.consumer:
-            yield ms
+        for msg in self.consumer:
+            yield msg

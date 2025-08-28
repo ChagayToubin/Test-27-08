@@ -45,12 +45,12 @@ class DALMongo:
             query = {}
             if last_date:
                 query = {"CreateDate": {"$gt": last_date}}
-            docs = list(collection.find(query).sort("CreateDate", 1).limit(100))
+            docs = list(collection.find(query).sort("CreateDate", 1).limit(1))
             docs = DALMongo.correct_the_id(docs)
             if docs:
                 for d in docs:
                     print(d)
-                    self.check_raw_tweets_antisemitic_and_send(d)
+                    # self.check_raw_tweets_antisemitic_and_send(d)
 
                 last_date = docs[-1]["CreateDate"]
 
@@ -69,5 +69,4 @@ class DALMongo:
         for organ in result:
             organ['_id'] = str(organ['_id'])
             organ['CreateDate'] = str(organ['CreateDate'])
-
         return result

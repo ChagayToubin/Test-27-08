@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 import time
-from project.kafka.Producer.kafka_pro import KafkaPro
+from project.kafka_app.Producer.kafka_pro import KafkaClient
 
 class DALMongo:
 
@@ -13,7 +13,7 @@ class DALMongo:
         self.URI = self.get_URI()
         self.client = None
         self.data = None
-        self.kaf = KafkaPro(kaf_config)
+        self.kaf = KafkaClient(kaf_config)
 
     def get_URI(self):
         if self.user and self.password:
@@ -50,7 +50,7 @@ class DALMongo:
             if docs:
                 for d in docs:
                     print(d)
-                    # self.check_raw_tweets_antisemitic_and_send(d)
+                    self.check_raw_tweets_antisemitic_and_send(d)
 
                 last_date = docs[-1]["CreateDate"]
 

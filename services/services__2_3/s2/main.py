@@ -2,8 +2,8 @@ import os
 import json
 from pydoc_data.topics import topics
 
-from project.kafka.Consumer.kafka_con import KafkaDAL
-from project.kafka.Producer.kafka_pro import KafkaClient
+from project.kafka_app.Consumer.kafka_con import KafkaDAL
+from project.kafka_app.Producer.kafka_pro import KafkaClient
 from core.app_maneger.app_maneger import AppManager
 
 

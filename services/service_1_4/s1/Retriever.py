@@ -1,6 +1,6 @@
 
 #
-from  services.service_1_4.fech_mongo import DALMongo
+from project.services.service_1_4.fech_mongo import DALMongo
 
 
 class Retriever1:

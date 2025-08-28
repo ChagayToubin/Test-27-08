@@ -1,5 +1,5 @@
-from project.kafka.Consumer.kafka_con import KafkaDAL
-from project.kafka.Producer.kafka_pro import KafkaClient
+from project.kafka_app.Consumer.kafka_con import KafkaDAL
+from project.kafka_app.Producer.kafka_pro import KafkaClient
 from project.services.services__2_3.s2.core.data_builder.data_builder import DataBuilder
 
 class AppManager:

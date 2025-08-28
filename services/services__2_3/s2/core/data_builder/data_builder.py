@@ -18,3 +18,5 @@ class DataBuilder:
             if '_not_' in topic_new_names[0]:
                 return topic_new_names[0]
         return topic_new_names[1]
+
+

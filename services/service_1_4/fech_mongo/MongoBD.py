@@ -2,9 +2,10 @@ from pymongo import MongoClient
 import time
 from project.kafka_app.Producer.kafka_pro import KafkaClient
 
+
 class DALMongo:
 
-    def __init__(self, host, database, collection, user, password, kaf_config):
+    def __init__(self, host, database, collection, user, password, kaf_config=None):
         self.host = host
         self.database = database
         self.collection = collection
@@ -46,23 +47,32 @@ class DALMongo:
             if last_date:
                 query = {"CreateDate": {"$gt": last_date}}
             docs = list(collection.find(query).sort("CreateDate", 1).limit(1))
+            last_date = docs[-1]["CreateDate"]
             docs = DALMongo.correct_the_id(docs)
             if docs:
                 for d in docs:
                     print(d)
                     self.check_raw_tweets_antisemitic_and_send(d)
 
-                last_date = docs[-1]["CreateDate"]
-
-            time.sleep(10)
+            time.sleep(4)
 
     def check_raw_tweets_antisemitic_and_send(self, msg):
-
         if msg["Antisemitic"] == 1:
             self.kaf.send_to_kapka("raw_tweets_antisemitic", msg)
         else:
             self.kaf.send_to_kapka("raw_tweets_not_antisemitic", msg)
 
+    def enter_to_local_db(self, data,topic):
+        self.open_connection()
+        db = self.client[self.database]
+        collection_antisemtic = db["raw_tweets_antisemitic"]
+        collection_not_antisemtic = db["raw_tweets_not_antisemitic"]
+        data.pop("_id", None)
+
+        if topic == "raw_tweets_antisemitic":
+            x = collection_antisemtic.insert_one(data)
+        else:
+            x = collection_not_antisemtic.insert_one(data)
 
     @staticmethod
     def correct_the_id(result):

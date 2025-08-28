@@ -1,5 +1,4 @@
 from project.services.services__2_3.core.cleaner.cleaner import Cleaner
-from project.services.services__2_3.s2.main import manager_app
 from project.services.services__2_3.s3.core.dal.dal_file import DAL
 from project.services.services__2_3.s3.core.data_builder.data_analyzer.data_analyzer import DataAnalyzer
 
@@ -16,14 +15,16 @@ class DataBuilder:
         message = kafka_object.value
         clean_text = message['clean_text']
         message["sentiment"] = DataAnalyzer.classify_sentiment(clean_text)
-        message["weapons_detected"] = DataAnalyzer.find_words_in_blacklist(clean_text.split, blacklist)
-        message['relevant_timestamp'] = DataAnalyzer.classify_sentiment(message['text'])
+        message["weapons_detected"] = ",".join(list(DataAnalyzer.find_words_in_blacklist(clean_text.split(), blacklist)))
+        message['relevant_timestamp'] = DataAnalyzer.get_dates_in_text(message['text'])
         return {'topic_name': topic_new_name, 'message': message}
 
 
     @staticmethod
     def attaching_topic_name(topic_old_name, topic_new_names):
+        _not__in_topic = 0
+        if '_not_' in topic_new_names[1]:
+            _not__in_topic = 1
         if '_not_' in topic_old_name:
-            if '_not_' in topic_new_names[0]:
-                return topic_new_names[0]
-        return topic_new_names[1]
+                return topic_new_names[_not__in_topic]
+        return topic_new_names[_not__in_topic - 1]

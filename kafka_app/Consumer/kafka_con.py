@@ -13,7 +13,7 @@ class KafkaDAL:
             self.consumer = KafkaConsumer(*self.topics, **self.configs)
         except Exception as e:
             print(type(e).__name__, "-", e)
-            raise RuntimeError("Failed to connect to Kapka.") from e
+            raise RuntimeError(f"Kafka connect failed: {type(e).__name__} - {e}") from e
 
 
     def close(self):

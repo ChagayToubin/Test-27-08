@@ -4,8 +4,8 @@ import json
 
 
 HOST = os.getenv("HOST", "localhost")
-USER = os.getenv("USER", None)
-PASSWORD = os.getenv("PASSWORD",None)
+USER = os.getenv("USER")
+PASSWORD = os.getenv("PASSWORD")
 DB = os.getenv("DATABASE", "IranMalDB")
 COLLECTION = os.getenv("COLLECTION", "")
 
@@ -17,14 +17,13 @@ kaf_config = {
     'enable_auto_commit' : 'True',
     'value_deserializer' : lambda v: json.loads(v.decode("utf-8"))
 }
-# topics_client=["enriched_preprocessed_tweets_antisemitic","enriched_preprocessed_tweets_not_antisemitic"]
+topics_dal=["enriched_preprocessed_tweets_antisemitic","enriched_preprocessed_tweets_not_antisemitic"]
 
-topics_client=["preprocessed_tweets_antisemitic","preprocessed_tweets_not_antisemitic"]
 
 class main:
 
     def __init__(self):
-        self.p = Persister(HOST, DB, COLLECTION, USER, PASSWORD,kaf_config,topics_client)
+        self.p = Persister(HOST, DB, COLLECTION, USER, PASSWORD,kaf_config,topics_dal)
 
     def pull_from_kafka(self):
         print("--")

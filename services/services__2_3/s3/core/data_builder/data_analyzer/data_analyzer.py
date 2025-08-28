@@ -1,5 +1,5 @@
 import nltk
-from datetime import datetime
+from dateutil import parser
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 nltk.download('vader_lexicon')
 
@@ -8,7 +8,7 @@ class DataAnalyzer:
 
     @staticmethod
     def find_words_in_blacklist(words : list[str], blacklist : set[str]) -> set[str]:
-        words_in_blacklist = set()
+        words_in_blacklist = {''}
         for word in words:
             if word in blacklist:
                 words_in_blacklist.add(word)
@@ -19,9 +19,9 @@ class DataAnalyzer:
     @staticmethod
     def classify_sentiment(text):
         score = SentimentIntensityAnalyzer().polarity_scores(text)
-        if score >= 0.5:
+        if score['compound'] >= 0.5:
             return "Positive"
-        elif score <= -0.5:
+        elif score['compound'] <= -0.5:
             return "Negative"
         else:
             return "Neutral"
@@ -29,19 +29,15 @@ class DataAnalyzer:
 
     @staticmethod
     def get_dates_in_text(words : list):
-        time_format = "%d-%m-%Y"
-        list_date = set()
-        matches = words
-        for match in matches:
+        dates = []
+        for word in words:
             try:
-                datetime.strptime(match, time_format)
-                list_date.add(match)
-            except ValueError:
+                date = parser.parse(word, dayfirst=True)
+                dates.append(date)
+            except (ValueError, OverflowError):
                 pass
-        if list_date:
-            return max(list_date)
-
-
+        if dates:
+            return max(dates).strftime("%Y-%m-%d")
 
 
 

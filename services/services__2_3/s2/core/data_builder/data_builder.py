@@ -14,9 +14,11 @@ class DataBuilder:
 
     @staticmethod
     def attaching_topic_name(topic_old_name, topic_new_names):
+        _not__in_topic = 0
+        if '_not_' in topic_new_names[1]:
+            _not__in_topic = 1
         if '_not_' in topic_old_name:
-            if '_not_' in topic_new_names[0]:
-                return topic_new_names[0]
-        return topic_new_names[1]
+                return topic_new_names[_not__in_topic]
+        return topic_new_names[_not__in_topic - 1]
 
 

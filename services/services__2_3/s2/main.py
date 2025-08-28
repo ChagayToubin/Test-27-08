@@ -16,12 +16,11 @@ kafka_port_dal = os.getenv("KAFKA_PORT", 9092)
 group_id = os.getenv("GROUP_ID", "my-consumer")
 
 
+topics_client = os.getenv("TOPICS_CLIENT", 'preprocessed_tweets_antisemitic,preprocessed_tweets_not_antisemitic').split(',')
 configs_for_kafka_client = {
     'bootstrap_servers':[f"{kafka_host_client}:{kafka_port_client}"],
     'value_serializer': lambda v: json.dumps(v).encode("utf-8")
 }
-
-topics_client = os.getenv("TOPICS_CLIENT", 'preprocessed_tweets_antisemitic,preprocessed_tweets_not_antisemitic').split(',')
 
 
 configs_for_kafka_dal = {

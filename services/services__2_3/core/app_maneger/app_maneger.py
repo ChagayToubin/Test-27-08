@@ -19,6 +19,7 @@ class AppManager:
                 print("The pull from Kafka was successful.")
                 data = self.data_builder.build(msg, self.topic_client_names)
                 self.client.send_to_kapka(data['topic_name'], data['message'])
+                print(data["topic_name"])
                 print("'The sending was successful.")
         except Exception as e:
             print(type(e).__name__, "-", e)

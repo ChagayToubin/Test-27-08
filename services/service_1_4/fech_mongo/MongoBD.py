@@ -69,7 +69,8 @@ class DALMongo:
         collection_not_antisemtic = db["raw_tweets_not_antisemitic"]
         data.pop("_id", None)
 
-        if topic == "raw_tweets_antisemitic":
+
+        if topic == "enriched_preprocessed_tweets_antisemitic":
             x = collection_antisemtic.insert_one(data)
         else:
             x = collection_not_antisemtic.insert_one(data)

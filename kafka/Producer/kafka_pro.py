@@ -1,6 +1,6 @@
 from kafka import KafkaProducer
 
-class KafkaPro:
+class KafkaClient:
 
     def __init__(self, configs):
         self.configs = configs
@@ -21,7 +21,6 @@ class KafkaPro:
 
     def send_to_kapka(self, topic_name, data):
         try:
-
             self.producer.send(topic_name, data)
         except Exception as e:
             raise RuntimeError("Failed to send to Kapka") from e

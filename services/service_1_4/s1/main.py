@@ -1,4 +1,4 @@
-from Retriever import Retriever1
+from project.services.service_1_4.s1.Retriever import Retriever1
 import os
 import json
 HOST = os.getenv("HOST", "cluster0.6ycjkak.mongodb.net")
@@ -20,8 +20,6 @@ class main:
 
 
 m=main()
-m.main_start()
-
 
 
 

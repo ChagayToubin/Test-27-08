@@ -1,20 +1,19 @@
-# Use official Python base image
-FROM python:3.12-slim
+FROM python:3.10-slim
 
-# Set working directory
 WORKDIR /app
 
-# Copy requirements if you have one (otherwise install directly)
+# dependencies
 COPY requirements.txt .
-
-# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy project files into the container
-COPY . .
+# copy packages
+COPY project/__init__.py /app/project/__init__.py
+COPY project/services/__init__.py /app/project/services/__init__.py
+COPY project/services/service_1_4/__init__.py /app/project/services/service_1_4/__init__.py
 
-# Expose port 8000
-EXPOSE 8000
+COPY project/services/service_1_4/fech_mongo /app/project/services/service_1_4/fech_mongo
+COPY project/services/service_1_4/s1 /app/project/services/service_1_4/s1
+COPY project/kafka_app /app/project/kafka_app
 
-# Start FastAPI with uvicorn
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+# run
+CMD ["python", "-m", "project.services.service_1_4.s1.main"]

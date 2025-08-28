@@ -19,7 +19,7 @@ kaf_config = {
 }
 # topics_client=["enriched_preprocessed_tweets_antisemitic","enriched_preprocessed_tweets_not_antisemitic"]
 
-topics_client=["preprocessed_tweets_antisemitic","preprocessed_tweets_not_antisemitic"]
+topics_client=["enriched_preprocessed_tweets_antisemitic","enriched_preprocessed_tweets_not_antisemitic"]
 
 class main:
 
@@ -31,5 +31,4 @@ class main:
         self.p.pull_from_kafka()
 
 m=main()
-print("---")
 m.pull_from_kafka()

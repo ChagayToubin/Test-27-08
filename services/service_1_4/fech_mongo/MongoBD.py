@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 import time
-from project.kafka_app.Producer.kafka_pro import KafkaClient
+from project.kafka_app.Producer.kafka_pro import proKafka
 
 
 class DALMongo:
@@ -14,7 +14,7 @@ class DALMongo:
         self.URI = self.get_URI()
         self.client = None
         self.data = None
-        self.kaf = KafkaClient(kaf_config)
+        self.kaf = proKafka(kaf_config)
 
     def get_URI(self):
         if self.user and self.password:
@@ -69,7 +69,7 @@ class DALMongo:
         collection_not_antisemtic = db["raw_tweets_not_antisemitic"]
         data.pop("_id", None)
 
-        if topic == "raw_tweets_antisemitic":
+        if topic == "enriched_preprocessed_tweets_antisemitic":
             x = collection_antisemtic.insert_one(data)
         else:
             x = collection_not_antisemtic.insert_one(data)

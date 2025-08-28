@@ -1,6 +1,6 @@
 from kafka import KafkaProducer
 
-class KafkaClient:
+class proKafka:
 
     def __init__(self, configs):
         self.configs = configs

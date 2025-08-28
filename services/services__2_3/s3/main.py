@@ -2,7 +2,7 @@ import os
 import json
 
 from project.kafka_app.Consumer.kafka_con import KafkaDAL
-from project.kafka_app.Producer.kafka_pro import KafkaClient
+from project.kafka_app.Producer.kafka_pro import proKafka
 from project.services.services__2_3.core.app_maneger.app_maneger import AppManager
 from project.services.services__2_3.s3.core.data_builder.data_builder import DataBuilder
 
@@ -33,7 +33,7 @@ configs_for_kafka_dal = {
 }
 
 dal = KafkaDAL(topics_dal, configs_for_kafka_dal)
-client = KafkaClient(configs_for_kafka_client)
+client = proKafka(configs_for_kafka_client)
 data_builder = DataBuilder
 
 

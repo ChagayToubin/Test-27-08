@@ -1,4 +1,4 @@
-from project.services.services__2_3.s2.core.data_builder.cleaner import Cleaner
+from project.services.services__2_3.core.cleaner.cleaner import Cleaner
 
 class DataBuilder:
 
@@ -18,3 +18,5 @@ class DataBuilder:
             if '_not_' in topic_new_names[0]:
                 return topic_new_names[0]
         return topic_new_names[1]
+
+

@@ -1,0 +1,1 @@
+from .MongoBD import DALMongo

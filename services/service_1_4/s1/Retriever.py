@@ -1,0 +1,17 @@
+
+#
+from  services.service_1_4.fech_mongo import DALMongo
+
+
+class Retriever1:
+    def __init__(self,HOST, DB, COLLECTION, USER, PASSWORD,kaf_config):
+        self.Mongo=DALMongo(HOST, DB, COLLECTION, USER, PASSWORD,kaf_config)
+
+    def Rstart_pull_100_min(self):
+        self.Mongo.Dstart_pull_100_min()
+        self.Mongo.kaf.close()
+
+
+
+
+

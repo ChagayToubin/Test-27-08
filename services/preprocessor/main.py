@@ -3,7 +3,7 @@ import json
 
 from project.classes.fetchers.my_kafka.my_kafka_consumer.my_kafka_consumer import MyKafkaConsumer
 from project.classes.fetchers.my_kafka.my_kafka_producer.my_kafka_producer import MyKafkaProducer
-from project.classes.app_maneger.app_maneger import AppManager
+from project.classes.app_maneger.maneger_kafka_to_kafka.app_maneger import AppManager
 from project.classes.message_builders.message_builder_preprocessor.message_builder_preprocessor import MessageBuilderPreprocessor
 
 

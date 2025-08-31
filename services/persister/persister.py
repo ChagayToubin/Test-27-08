@@ -13,7 +13,6 @@ class Persister:
     def pull_from_kafka(self):
         self.kaf.open()
         for i in self.kaf.consume():
-            print(i.topic,"ssss")
             self.Mongo.enter_to_local_db(i.value,i.topic)
 
 
